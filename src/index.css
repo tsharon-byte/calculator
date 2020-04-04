@@ -1,0 +1,57 @@
+:root {
+    --button-width: 60px;
+    --button-height: 45px;
+}
+
+body {
+    background-color: Pink;
+    height: 98vh;
+}
+
+#root {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculator {
+    width: calc(var(--button-width) * 4);
+    height: calc(var(--button-height) * 6);
+    outline: 6px ridge #666;
+    background-color: silver;
+}
+
+.clickable {
+    width: var(--button-width);
+    height: var(--button-height);
+    font-size: 1.5em;
+    background-color: LightBlue;
+}
+
+#clear {
+    color: red;
+    width: calc(var(--button-width) * 3);
+    background-color: DimGray;
+}
+
+#equals {
+    width: calc(var(--button-width) * 2);
+    background-color: DimGray;
+}
+
+#tablo {
+    width: calc(var(--button-width) * 4);
+    font-size: 1em;
+    height: var(--button-height);
+    background-color: black;
+    color: white;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+#formula {
+    color: orange;
+    height: 50%
+}
