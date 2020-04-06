@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 
 const statesConst = {
     initial: 0,
@@ -65,7 +64,7 @@ export default class Calculator extends React.Component {
 
     handleClick(event) {
         let buttonItem = buttons.find((item) => {
-            if (item.buttonId == event.target.id) {
+            if (item.buttonId === event.target.id) {
                 return true;
             }
         });
@@ -74,7 +73,7 @@ export default class Calculator extends React.Component {
         let output = this.state.output;
         let formula = this.state.formula;
         let decimalOperandFlag = this.state.decimalOperandFlag;
-        if (undefined != buttonItem) {
+        if (undefined !== buttonItem) {
             switch (event.target.id) {
                 case "clear":
                     output = "0";
@@ -83,7 +82,7 @@ export default class Calculator extends React.Component {
                     decimalOperandFlag = false;
                     break;
                 case "equals":
-                    if (this.state.calculatorState == statesConst.evaluated) {
+                    if (this.state.calculatorState === statesConst.evaluated) {
                         break;
                     }
                     output = Math.round(eval(this.state.formula) * 10000) / 10000;
@@ -91,7 +90,7 @@ export default class Calculator extends React.Component {
                     calculatorState = statesConst.evaluated;
                     break;
                 case "decimal":
-                    if (this.state.calculatorState == statesConst.evaluated) {
+                    if (this.state.calculatorState === statesConst.evaluated) {
                         break;
                     }
                     calculatorState = statesConst.number;
@@ -116,13 +115,13 @@ export default class Calculator extends React.Component {
                 case "divide":
                     calculatorState = statesConst.operator;
                     decimalOperandFlag = false;
-                    if (this.state.calculatorState == statesConst.evaluated) {
+                    if (this.state.calculatorState === statesConst.evaluated) {
                         formula = this.state.output + buttonItem.name;
                         break;
                     }
-                    if (this.state.calculatorState == statesConst.initial) {
+                    if (this.state.calculatorState === statesConst.initial) {
                         formula = '0';
-                    } else if (this.state.calculatorState == statesConst.operator || statesConst.negativeOperand == this.state.calculatorState) {
+                    } else if (this.state.calculatorState === statesConst.operator || statesConst.negativeOperand === this.state.calculatorState) {
                         formula = this.state.formula.slice(0, -1);
                         console.log(formula);
                         if (isLastSign(formula)) {
@@ -137,20 +136,20 @@ export default class Calculator extends React.Component {
                 case "subtract":
                     decimalOperandFlag = false;
                     calculatorState = statesConst.negativeOperand;
-                    if (this.state.calculatorState == statesConst.evaluated) {
+                    if (this.state.calculatorState === statesConst.evaluated) {
                         formula = this.state.output + buttonItem.name;
                         break;
                     }
-                    if (this.state.calculatorState == statesConst.initial) {
+                    if (this.state.calculatorState === statesConst.initial) {
                         formula = '0';
-                    } else if (this.state.calculatorState == statesConst.negativeOperand) {
+                    } else if (this.state.calculatorState === statesConst.negativeOperand) {
                         formula = this.state.formula(0, -1) + buttonItem.name;
                         break;
                     }
                     formula = this.state.formula + buttonItem.name;
                     break;
                 default:
-                    if (this.state.calculatorState == statesConst.evaluated) {
+                    if (this.state.calculatorState === statesConst.evaluated) {
                         break;
                     }
                     calculatorState = statesConst.number;
@@ -160,7 +159,7 @@ export default class Calculator extends React.Component {
                             formula = buttonItem.name;
                             break;
                         case statesConst.number:
-                            if (this.state.output != '0') {
+                            if (this.state.output !== '0') {
                                 output = this.state.output + buttonItem.name;
                                 formula = this.state.formula + buttonItem.name;
                             } else {
@@ -191,7 +190,7 @@ export default class Calculator extends React.Component {
     render() {
         const buttonMap = buttons.map((item) => {
             return <Clickable buttonId={item.buttonId} name={item.name} onClick={this.handleClick}/>;
-        })
+        });
         return (<div className="calculator">
             <Display output={this.state.output} formula={this.state.formula}/>
             {buttonMap}
